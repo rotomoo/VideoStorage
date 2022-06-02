@@ -8,7 +8,6 @@ import me.bi.videostorage.dto.TokenDto;
 import me.bi.videostorage.repository.AuthorityRepository;
 import me.bi.videostorage.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -76,9 +75,14 @@ class AuthServiceTest {
         //when
         authService.signup(dto1);
 
+        try {
+            authService.signup(dto2);
+        } catch (RuntimeException e) {
+            return;
+        }
+
         //then
-        RuntimeException thrown = assertThrows(RuntimeException.class, () -> authService.signup(dto2));
-        assertEquals("이미 가입되어 있는 이메일입니다.", thrown.getMessage());
+        fail("예외가 발생해야 합니다.");
     }
 
     @Test
