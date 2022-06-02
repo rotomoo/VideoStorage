@@ -1,51 +1,32 @@
-[스프링] 스프링 프로젝트
+[스프링부트] REST API VideoStorage
 ======================
 # 1. 웹 설명
 ## ▶ 웹 설명
-	1. 개발 환경 - Spring Boot 2.6.2, java 11 Version, h2 Database 1.4.200
-    2. 핵심 라이브러리 - 스프링 MVC, 스프링 ORM, JPA, 하이버네이트, 스프링데이터 JPA
-    3. 기타 라이브러리 - H2 데이터베이스, thymeleaf, 로깅 SLF4J, 테스트(junit4)
-    4. 회원, 상품, 주문 기능 웹 개발
+	1. 개발 환경 - Spring Boot 2.6.8, java 11, (DB)Mysql
+    2. 핵심 라이브러리 - Spring Web, Spring Security, JPA, Mysql, jjwt 0.11.2
+    3. 기타 라이브러리 - lombok, validation, devtools, Test
+    4. Security, Jwt(access, refresh Token) 기반 회원가입, 로그인, 권한별 비디오 업로드, 재생
 
 ****
-# 2. 애플리케이션 아키텍처
-## ▶ 계층형 구조 사용
-![img.png](img.png)
-```
-/src
-    /main : 메인 웹
-        /java
-            /...
-                /controller : 웹 계층
-                /service : 비즈니스 로직, 트랜잭션 처리
-                /repository : JPA를 직접 사용하는 계층, 엔티티 매니저 사용
-                /domain : 엔티티가 모여 있는 계층, 모든 계층에서 사용
-                /exception : 공통 예외 설정
-                
-        /reources : 웹 계층
-            /static : css, js
-            /templates : thymeleaf 사용 html
-            
-    /test : 메인 웹 테스트
-        /java
-            /...
-                /repository : 리포지토리 테스트
-                /service : 서비스 테스트
-                
-        /reources : 테스트 DB서버
-```
-## ▶ 개발 순서
-    1. 도메인 개발
-	2. 리포지토리, 서비스 계층 개발
-    3. 테스트 케이스를 작성 검증
-    4. 웹 계층 적용
+# 2. 개발 내용
+## ▶ 기능
+- 유저 관리
+    - 회원 가입
+    
+- 유저 로그인
+    - 토큰 방식으로 구현
+        - Spring Securit 사용, access token, refresh token 구현
+        
+- 비디오 파일 업로드 (진행중)
+    - **(권한: user 권한만 사용 가능)**
+    - 로컬 디스크에 저장
+    - 최대 100MB 까지 허용
+    
+- 비디오 파일 재생 (진행중)
+    - **(권한: 비디오 소유자, admin 권한만 접근 가능)**
+    - 스트림 방식으로 요청, 206 Partial Download 구현
+    - 재생 검증 html video tag 사용
+
+전체 기능은 테스트 코드를 통해 기능 검증 (진행중)
 
 ****
-## 3. 웹 이미지
-### 웹
-![img2.png](img2.png)
-### DB
-![img3.png](img3.png)
-****
-## 4. 출처
-#### 인프런 김영한 강사님의 '실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발' 강의를 참고하여 개발하였습니다.
