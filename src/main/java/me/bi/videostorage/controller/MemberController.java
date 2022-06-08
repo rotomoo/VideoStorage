@@ -2,26 +2,25 @@ package me.bi.videostorage.controller;
 
 import lombok.RequiredArgsConstructor;
 import me.bi.videostorage.dto.MemberResponseDto;
+import me.bi.videostorage.dto.MemberUpdateDto;
 import me.bi.videostorage.service.MemberService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
+
     private final MemberService memberService;
 
     @GetMapping("/me")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public ResponseEntity<MemberResponseDto> getMyMemberInfo() {
+    public ResponseEntity<MemberResponseDto> getCurrentInfo() {
         return ResponseEntity.ok(memberService.getMyInfo());
     }
 
-    @GetMapping("/{email}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MemberResponseDto> getMemberInfo(@PathVariable String email) {
-        return ResponseEntity.ok(memberService.getMemberInfo(email));
+    @PutMapping("/update")
+    public void updateMember(@RequestBody MemberUpdateDto dto) {
+        memberService.updateMemberInfo(dto);
     }
 }

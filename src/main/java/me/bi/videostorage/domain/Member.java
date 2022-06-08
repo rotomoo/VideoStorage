@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Member {
 
@@ -48,7 +47,8 @@ public class Member {
     public void updateMember(MemberUpdateDto dto, PasswordEncoder passwordEncoder) {
         if(dto.getPassword() != null) this.password = passwordEncoder.encode(dto.getPassword());
         if(dto.getMemberName() != null) this.memberName = dto.getMemberName();
-        if(dto.getAuthorities().size() > 0) {
+        if (dto.getPhone() != null) this.phone = dto.getPhone();
+        if(dto.getAuthorities() != null && dto.getAuthorities().size() > 0) {
             this.authorities = dto.getAuthorities().stream()
                     .filter(AuthorityEnum::containsKey)
                     .map(AuthorityEnum::get)

@@ -10,10 +10,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberUpdateDto {
-    private String email;
+
     private String memberName;
     private String phone;
     private String password;
     private List<String> authorities;
-
 }

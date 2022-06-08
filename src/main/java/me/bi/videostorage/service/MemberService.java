@@ -16,14 +16,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Transactional(readOnly = true)
-    public MemberResponseDto getMemberInfo(String email) {
-        return memberRepository.findByEmail(email)
-                .map(MemberResponseDto::of)
-                .orElseThrow(() -> new RuntimeException("유저 정보가 없습니다."));
-    }
-
-    // 현재 SecurityContext 에 있는 유저 정보 가져오기
+    // 내 정보 조회
     @Transactional(readOnly = true)
     public MemberResponseDto getMyInfo() {
         return memberRepository.findById(SecurityUtil.getCurrentMemberId())
@@ -31,13 +24,21 @@ public class MemberService {
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
     }
 
-    // 회원 정보 수정 (이메일 변경 불가)
+    // 내 정보 수정 (이메일 수정 불가)
     @Transactional
-    public void updateMemberInfo(MemberUpdateDto dto) {
+    public void updateMyInfo(MemberUpdateDto dto) {
         Member member = memberRepository
-                .findByEmail(dto.getEmail())
-                .orElseThrow(() -> new RuntimeException("이메일 정보가 없습니다."));
+                .findByEmail(getMyInfo().getEmail())
+                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
 
         member.updateMember(dto,passwordEncoder);
     }
+
+/*    // 회원 정보 조회
+    @Transactional(readOnly = true)
+    public MemberResponseDto getMemberInfo(String email) {
+        return memberRepository.findByEmail(email)
+                .map(MemberResponseDto::of)
+                .orElseThrow(() -> new RuntimeException("유저 정보가 없습니다."));
+    }*/
 }

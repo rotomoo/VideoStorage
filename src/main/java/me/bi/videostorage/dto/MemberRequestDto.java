@@ -15,11 +15,13 @@ public class MemberRequestDto {
 
     private String email;
     private String password;
+    private String memberName;
 
     public Member toMember(PasswordEncoder passwordEncoder, Set<Authority> authorities) {
         return Member.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
+                .memberName(memberName)
                 .authorities(authorities)
                 .build();
     }
