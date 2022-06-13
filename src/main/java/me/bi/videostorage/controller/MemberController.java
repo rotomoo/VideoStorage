@@ -21,6 +21,6 @@ public class MemberController {
 
     @PutMapping("/update")
     public void updateMember(@RequestBody MemberUpdateDto dto) {
-        memberService.updateMemberInfo(dto);
+        memberService.updateMyInfo(dto);
     }
 }
