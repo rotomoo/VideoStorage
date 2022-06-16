@@ -1,9 +1,6 @@
 package me.bi.videostorage.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import me.bi.videostorage.domain.Authority;
 import me.bi.videostorage.domain.Member;
 import me.bi.videostorage.domain.Video;
@@ -11,17 +8,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Set;
 
-@Getter
-@NoArgsConstructor
+@Data
 public class VideoRequestDto {
-    private Long id;
     private Member member;
     private String origFileName;
     private String filePath;
 
     public Video toEntity() {
         return Video.builder()
-                .id(id)
                 .member(member)
                 .origFileName(origFileName)
                 .filePath(filePath)
@@ -29,8 +23,7 @@ public class VideoRequestDto {
     }
 
     @Builder
-    public VideoRequestDto(Long id, Member member, String origFileName, String filePath) {
-        this.id = id;
+    public VideoRequestDto(Member member, String origFileName, String filePath) {
         this.member = member;
         this.origFileName = origFileName;
         this.filePath = filePath;
