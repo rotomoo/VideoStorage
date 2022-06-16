@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Member {
 
@@ -48,12 +48,5 @@ public class Member {
         if(dto.getPassword() != null) this.password = passwordEncoder.encode(dto.getPassword());
         if(dto.getMemberName() != null) this.memberName = dto.getMemberName();
         if (dto.getPhone() != null) this.phone = dto.getPhone();
-        if(dto.getAuthorities() != null && dto.getAuthorities().size() > 0) {
-            this.authorities = dto.getAuthorities().stream()
-                    .filter(AuthorityEnum::containsKey)
-                    .map(AuthorityEnum::get)
-                    .map(Authority::new)
-                    .collect(Collectors.toSet());
-        }
     }
 }

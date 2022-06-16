@@ -1,15 +1,12 @@
 package me.bi.videostorage.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Authority {
 
     @Id
@@ -19,5 +16,10 @@ public class Authority {
 
     public String getAuthorityStatus() {
         return this.authorityStatus.toString();
+    }
+
+    @Builder
+    public Authority(AuthorityEnum authorityStatus) {
+        this.authorityStatus = authorityStatus;
     }
 }
