@@ -1,13 +1,9 @@
 package me.bi.videostorage.service;
 
-import me.bi.videostorage.domain.Authority;
-import me.bi.videostorage.domain.AuthorityEnum;
 import me.bi.videostorage.domain.Member;
 import me.bi.videostorage.dto.MemberRequestDto;
 import me.bi.videostorage.dto.TokenDto;
-import me.bi.videostorage.repository.AuthorityRepository;
 import me.bi.videostorage.repository.MemberRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,17 +26,7 @@ class AuthServiceTest {
     MemberRepository memberRepository;
 
     @Autowired
-    AuthorityRepository authorityRepository;
-
-    @Autowired
     EntityManager em;
-
-    // 테스트 전 데이터 추가
-    @BeforeEach
-    public void beforeEach() {
-        authorityRepository.save(new Authority(AuthorityEnum.ROLE_USER));
-        authorityRepository.save(new Authority(AuthorityEnum.ROLE_ADMIN));
-    }
 
     @Test
     public void 회원가입() throws Exception {
