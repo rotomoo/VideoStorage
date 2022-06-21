@@ -33,12 +33,4 @@ public class MemberService {
 
         member.updateMember(dto,passwordEncoder);
     }
-
-/*    // 회원 정보 조회
-    @Transactional(readOnly = true)
-    public MemberResponseDto getMemberInfo(String email) {
-        return memberRepository.findByEmail(email)
-                .map(MemberResponseDto::of)
-                .orElseThrow(() -> new RuntimeException("유저 정보가 없습니다."));
-    }*/
 }
