@@ -5,12 +5,25 @@ server:
       enabled: true
       force: true
 
+video:
+  upload:
+    location: C:\Java\videostorage\src\main\resources\videos
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/security?serverTimezone=Asia/Seoul
     username: bi
     password: 1234
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  redis:
+    port: 6379
+    host: localhost
 
   jpa:
     hibernate:
