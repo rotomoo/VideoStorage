@@ -7,7 +7,6 @@ import me.bi.videostorage.dto.TokenDto;
 import me.bi.videostorage.dto.TokenRequestDto;
 import me.bi.videostorage.service.AuthService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +29,6 @@ public class AuthController {
     }
 
     @PostMapping("/reissue")
-    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
         return ResponseEntity.ok(authService.reissue(tokenRequestDto));
     }
