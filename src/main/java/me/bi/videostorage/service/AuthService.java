@@ -90,7 +90,7 @@ public class AuthService {
         // access Token에서 Authentication객체 가져오기
         Authentication authentication = tokenProvider.getAuthentication(tokenRequestDto.getAccessToken());
 
-        // DB에서 memberID를 기반으로 Refresh Token 값 가져옴
+        // DB에서 member_id를 기반으로 Refresh Token 값 가져옴
         RefreshToken refreshToken = refreshTokenRepository.findByKey(authentication.getName())
                 .orElseThrow(() -> new RuntimeException("로그아웃 된 사용자입니다."));
 
