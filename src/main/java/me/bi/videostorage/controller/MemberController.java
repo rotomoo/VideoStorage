@@ -25,8 +25,9 @@ public class MemberController {
     }
 
     @PutMapping("/update")
-    public void updateMyInfo(@RequestBody MemberUpdateDto dto) {
+    public ResponseEntity<MemberResponseDto> updateMyInfo(@RequestBody MemberUpdateDto dto) {
         memberService.updateMyInfo(dto);
+        return ResponseEntity.ok(memberService.getMyInfo());
     }
 
     @DeleteMapping("/me")
