@@ -1,6 +1,5 @@
 package me.bi.videostorage.repository;
 
-import me.bi.videostorage.domain.RefreshToken;
 import me.bi.videostorage.domain.Video;
 import org.springframework.data.jpa.repository.JpaRepository;
 
