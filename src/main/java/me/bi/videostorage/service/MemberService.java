@@ -41,7 +41,7 @@ public class MemberService {
     @Transactional
     public void updateMyInfo(MemberUpdateDto dto) {
         Member member = memberRepository
-                .findByEmail(getMyInfo().getEmail())
+                .findById(SecurityUtil.getLoginMemberId())
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
 
         member.updateMember(dto,passwordEncoder);
@@ -68,7 +68,10 @@ public class MemberService {
      */
     @Transactional
     public void deleteMember() {
-        memberRepository.deleteByEmail(getMyInfo().getEmail())
-                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
+        Long loginMemberId = SecurityUtil.getLoginMemberId();
+        if (loginMemberId == null) {
+            throw new RuntimeException("로그인 유저 정보가 없습니다.");
+        }
+        memberRepository.deleteById(loginMemberId);
     }
 }

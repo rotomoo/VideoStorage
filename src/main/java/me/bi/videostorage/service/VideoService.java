@@ -34,7 +34,6 @@ public class VideoService {
     private String dir;
 
     private final MemberRepository memberRepository;
-    private final MemberService memberService;
     private final VideoRepository videoRepository;
 
 
@@ -46,7 +45,7 @@ public class VideoService {
 
         // 토큰에서 member 가져오기
         Member member = memberRepository
-                .findByEmail(memberService.getMyInfo().getEmail())
+                .findById(SecurityUtil.getLoginMemberId())
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
 
         // multipartFile 파일명 가져오기
