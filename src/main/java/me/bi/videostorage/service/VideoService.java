@@ -75,7 +75,7 @@ public class VideoService {
     public ResponseEntity<ResourceRegion> playVideo(HttpHeaders httpHeaders, VideoPlayRequestDto dto) throws IOException {
 
         // 토큰에서 currentMemberId 가져오기
-        Long currentMemberId = SecurityUtil.getCurrentMemberId();
+        Long currentMemberId = SecurityUtil.getLoginMemberId();
 
         // 파일명으로 uploader 찾기
         Long uploader = videoRepository.findByOrigFileName(dto.getFile()).get().getMember().getId();

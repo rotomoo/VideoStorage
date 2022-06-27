@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-// 직접 만든 TokenProvider, RedisTemplate, JwtFilter를 SecurityConfig 에 적용할 때 사용
+// TokenProvider, RedisTemplate, JwtFilter를 SecurityConfig 에 적용할 때 사용
 @RequiredArgsConstructor
 public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 

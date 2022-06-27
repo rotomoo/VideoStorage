@@ -30,7 +30,7 @@ public class MemberService {
      */
     @Transactional(readOnly = true)
     public MemberResponseDto getMyInfo() {
-        return memberRepository.findById(SecurityUtil.getCurrentMemberId())
+        return memberRepository.findById(SecurityUtil.getLoginMemberId())
                 .map(MemberResponseDto::of)
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
     }
@@ -59,7 +59,7 @@ public class MemberService {
         logoutValueOperations.set(jwt, jwt); // redis set 명령어
 
         // refreshToken 삭제
-        refreshTokenRepository.deleteByKey(String.valueOf(SecurityUtil.getCurrentMemberId()))
+        refreshTokenRepository.deleteByKey(String.valueOf(SecurityUtil.getLoginMemberId()))
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
     }
 
