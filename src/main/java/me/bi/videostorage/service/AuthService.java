@@ -87,7 +87,7 @@ public class AuthService {
             throw new RuntimeException("Refresh Token 이 유효하지 않습니다.");
         }
 
-        // access Token에서 Member ID 가져오기
+        // access Token에서 Authentication객체 가져오기
         Authentication authentication = tokenProvider.getAuthentication(tokenRequestDto.getAccessToken());
 
         // DB에서 memberID를 기반으로 Refresh Token 값 가져옴
