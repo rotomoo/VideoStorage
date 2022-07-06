@@ -28,8 +28,8 @@
 
 ****
 # 3. 개발 순서
-1. JWT 소개, 프로젝트 환경 설정 [blog](https://rotomoo.tistory.com/65?category=1006036)
-2. 도메인 분석 설계 [blog](https://rotomoo.tistory.com/66?category=1006036)
+1. 프로젝트 환경 설정 [blog](https://rotomoo.tistory.com/65?category=1006036)
+2. JWT 소개, 도메인 분석 설계 [blog](https://rotomoo.tistory.com/66?category=1006036)
 3. 엔티티 클래스 개발 [blog](https://rotomoo.tistory.com/67?category=1006036)
 4. JWT, Security 개발 [blog](https://rotomoo.tistory.com/68?category=1006036)
 5. 레포지토리 계층 , initDB class 개발 [blog](https://rotomoo.tistory.com/69?category=1006036)
