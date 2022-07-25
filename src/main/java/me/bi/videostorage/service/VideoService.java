@@ -43,21 +43,16 @@ public class VideoService {
     @Transactional
     public void uploadVideo(MultipartFile multipartFile) throws IOException {
 
-        // 토큰에서 member 가져오기
         Member member = memberRepository
                 .findById(SecurityUtil.getLoginMemberId())
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
 
-        // multipartFile 파일명 가져오기
         String videoName = multipartFile.getOriginalFilename();
-        
-        // resources/videos 경로에 파일명 추가
+
         Path location = Paths.get(dir).resolve(videoName);
 
-        // 비디오 복사
         Files.copy(multipartFile.getInputStream(), location, StandardCopyOption.REPLACE_EXISTING);
 
-        // DB 저장
         Video video = Video.builder()
                 .member(member)
                 .origFileName(videoName)
@@ -73,26 +68,20 @@ public class VideoService {
     @Transactional(readOnly = true)
     public ResponseEntity<ResourceRegion> playVideo(HttpHeaders httpHeaders, VideoPlayRequestDto dto) throws IOException {
 
-        // 토큰에서 currentMemberId 가져오기
         Long currentMemberId = SecurityUtil.getLoginMemberId();
 
-        // 파일명으로 uploader 찾기
         Long uploader = videoRepository.findByOrigFileName(dto.getFile()).get().getMember().getId();
-        
-        // currentMemberId로 권한 가져오기
+
         Set<Authority> authorities = memberRepository.findById(currentMemberId).get().getAuthorities();
 
-        // admin 체크
         boolean isAdmin = authorities.stream()
                 .map(Authority::getAuthorityStatus)
                 .anyMatch(a -> a.equals("ROLE_ADMIN"));
 
-        // admin 권한이 없거나 업로더가 아니라면
         if (!isAdmin && currentMemberId != uploader) {
             throw new RuntimeException("업로더가 아니거나 admin권한이 없습니다.");
         }
 
-        // 비디오 재생
         FileUrlResource resource = new FileUrlResource(dir + "\\" +dto.getFile());
         ResourceRegion resourceRegion = resourceRegion(resource, httpHeaders);
 
@@ -106,7 +95,6 @@ public class VideoService {
      */
     public ResponseEntity<ResourceRegion> playVideoTest(HttpHeaders httpHeaders, @PathVariable String name) throws IOException {
 
-        // 비디오 재생
         FileUrlResource resource = new FileUrlResource(dir + "\\" + name);
         ResourceRegion resourceRegion = resourceRegion(resource, httpHeaders);
 
@@ -115,7 +103,6 @@ public class VideoService {
                 .body(resourceRegion);
     }
 
-    // 스트림 방식 206 Partial Download
     private ResourceRegion resourceRegion(Resource video, HttpHeaders httpHeaders) throws IOException {
         final long chunkSize = 1000000L;
         long contentLength = video.contentLength();
