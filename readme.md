@@ -39,3 +39,6 @@
 9. 웹 계층 개발 - 1. 회원가입, 로그인, 재발급 [blog](https://rotomoo.tistory.com/73?category=1006036)
 10. 웹 계층 개발 - 2. 내 정보 조회, 수정, 로그아웃, 회원 탈퇴 [blog](https://rotomoo.tistory.com/74?category=1006036)
 11. 웹 계층 개발 - 3. 비디오 업로드, 비디오 리스트 조회, 비디오 재생 [blog](https://rotomoo.tistory.com/75?category=1006036)
+
+## ▶ Postman Test
+https://user-images.githubusercontent.com/30739181/204204334-94f852dd-5608-46be-bb17-3cdee03a3f83.mp4
